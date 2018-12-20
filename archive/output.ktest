@@ -1,0 +1,7 @@
+require: %.bb %.ok.ll
+test_dir: gen-tests
+input: %.bb
+dir_run: make -s output:%
+output: %.output
+reference: %.reference
+cleanup: rm %.output %.reference
