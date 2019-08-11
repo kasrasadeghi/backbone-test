@@ -4,7 +4,7 @@
 
 (def @main params i32 (do
   (auto %result %struct.String)
-  (store (cast i8* (i64 0)) (index %result 0))
+  (store (cast i8* (0 i64)) (index %result 0))
   (store 0 (index %result 1))
   (return 0)
 ))
