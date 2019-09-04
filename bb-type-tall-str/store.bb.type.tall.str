@@ -1,0 +1,10 @@
+(def @return4 params u64 (do (return 4)))
+
+(decl @printf (types i8* ...) i32)
+
+(def @main (params (%argc i32) (%argv i8**)) i32 (do
+  (auto %a u64)
+  (store (call @return4 args) %a)
+  (call-vargs @printf (args "a = %lu\0A\00" (load %a)))
+  (return 0)
+))
