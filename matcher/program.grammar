@@ -1,0 +1,4 @@
+(Grammar
+(Program (#name (* A)))
+(A a)
+)
