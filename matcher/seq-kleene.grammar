@@ -1,0 +1,7 @@
+(Grammar
+(Program (#name A B C (* Int)))
+(Int #int)
+(A a)
+(B b)
+(C c)
+)
