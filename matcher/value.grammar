@@ -1,7 +1,0 @@
-(Grammar
-(Program (#name (* TopLevel)))
-(TopLevel (| A B))
-(A (a Int (* Int)))
-(B (b (* Int)))
-(Int #int)
-)

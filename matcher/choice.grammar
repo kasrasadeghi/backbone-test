@@ -1,7 +1,0 @@
-(Grammar
-(Program (#name (* ChoiceExample)))
-(ChoiceExample (| A B C))
-(A choice-A)
-(B choice-B)
-(C choice-C)
-)
