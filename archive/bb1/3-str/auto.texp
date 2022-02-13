@@ -1,0 +1,8 @@
+(decl @printf (types i8* ...) i32)
+
+(def @main (params) i32 (do
+  (auto %c i8)
+  (store 65 %c)
+  (call-vargs @printf (args "c = %c\0A\00" (load %c)))
+  (return 0)
+))

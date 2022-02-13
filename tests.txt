@@ -1,0 +1,32 @@
+hello world
+if-expr
+struct
+auto
+slt
+cc
+ccc
+csc
+cscccc
+tallvoid
+retcall
+callstmt
+argcall
+if-false
+if
+printf
+multiargcall
+return-strget /gen
+checktall-void /normalize
+no-word /.cst
+primitive-add /.cst
+main /.cst
+some /.cst
+
+c-style /.cst
+c-style-error /.cst
+
+  parser?
+unfinished_char /.cst
+unfinished_paren /.cst
+unfinished_string /.cst
+comment /.cst

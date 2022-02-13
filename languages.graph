@@ -1,0 +1,33 @@
+(language bb0
+  (primitive)
+  (features "llvm-ir"))
+
+(language bb-untyped
+  (pass typeinfer)
+  (features
+    (+ "type inference")
+    (+ "cast abstraction")
+    (- "explicit individual kinds of casts, such as bitcast, zero-extension, sign-extension"))
+  (output bb0))
+
+(language bb-tall
+  (pass normalize)
+  (features
+    (+ "nested expressions"))
+  (output bb-untyped))
+
+(language bb-strliteral
+  (pass str)
+  (features
+    (+ "string literals")
+    (- "string tables"))
+  (output bb-tall))
+
+(language bb-modular
+  (pass include)
+  (features
+    (+ "relative include statement"))
+  (output bb-strliteral))
+
+(language backbone
+  (synonym bb-modular))
