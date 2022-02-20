@@ -86,7 +86,7 @@ class BB:
                "failed to format {out.name}")
 
   @staticmethod
-  def input_for_pass(passname):
+  def get_pass(passname):
     for p in BB.passtable:
       if passname == p.passname:
         return p
@@ -97,9 +97,8 @@ class BBTest:
   test = f"{BB.proj}/backbone-test"
 
   @classmethod
-  def __runner__(cls, testcase, cmd, passname):
-    folder = BB.input_for_pass(passname).input_path
-    result = CMD(f"{BB.cpp}/bin/runner {cls.test}/{folder}/{testcase}.bb --{cmd} {passname}",
+  def __runner__(cls, testcase, cmd, passname, input_folder):
+    result = CMD(f"{BB.cpp}/bin/runner {cls.test}/{input_folder}/{testcase}.bb --{cmd} {passname}",
                  "runner failed on input")
     filename = f'{testcase}-{cmd}-{passname}.texp'
     with TEMP(filename, result) as out:
@@ -107,12 +106,13 @@ class BBTest:
 
   @classmethod
   def single(cls, test, passname):
-    return cls.__runner__(test, 'single', passname)
+    return cls.__runner__(test, 'single', passname, BB.get_pass(passname).input_path)
 
+  @classmethod
   def until(cls, test, passname):
-    return cls.__runner__(test, 'until', passname)
+    return cls.__runner__(test, 'until', passname, BB.passtable[0].input_path)
 
-  def all(cls, test):
+  def all(cls, tes):
     return CALL(f"{cls.cpp}/bin/cornerstone {cls.bb1}/3-str/{test}.texp")
 
   @classmethod
@@ -127,9 +127,20 @@ class BBTest:
       else:
         return CALL(f"{cls.bbt}/tmp/{test}")
 
+  @staticmethod
+  def collect():
+    return [x[:-len('.bb')] for x in os.listdir(f"{BBTest.test}/input/bb-modular") if x.endswith('.bb')]
 
 def main():
-  print(BBTest.single(test="hello", passname="include"))
+  testcases = BBTest.collect()
+  for passinfo in BB.passtable:
+    for test in testcases:
+      output_filename = passinfo.output + "/" + test + ".bb"
+      with open(output_filename, "w+") as f:
+        content, returncode = BBTest.until(test=test, passname=passinfo.passname)
+        if 0 == returncode:
+          f.write(content)
+
 
 if __name__ == "__main__":
   main()
