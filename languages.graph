@@ -1,10 +1,12 @@
 (language bb0
   (primitive)
+  (grammar "bb.texp")
   (features "llvm-ir"))
 
 (language bb-untyped
   (pass typeinfer)
-  (features
+  (grammar "bb-type.texp")
+  (features over bb0
     (+ "type inference")
     (+ "cast abstraction")
     (- "explicit individual kinds of casts, such as bitcast, zero-extension, sign-extension"))
@@ -12,20 +14,23 @@
 
 (language bb-tall
   (pass normalize)
-  (features
+  (grammar "bb-type-tall.texp")
+  (features over bb-untyped
     (+ "nested expressions"))
   (output bb-untyped))
 
-(language bb-strliteral
+(language bb-str
   (pass str)
-  (features
+  (grammar "bb-type-tall-str.texp")
+  (features over bb-tall
     (+ "string literals")
     (- "string tables"))
   (output bb-tall))
 
 (language bb-modular
   (pass include)
-  (features
+  (grammar "bb-type-tall-str-include.texp")
+  (features over bb-str
     (+ "relative include statement"))
   (output bb-strliteral))
 
