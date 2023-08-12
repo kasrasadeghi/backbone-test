@@ -95,6 +95,8 @@ class BB:
 
 class BBTest:
   test = f"{BB.proj}/backbone-test"
+  def __init
+  runner_impl_path =
 
   @classmethod
   def __runner__(cls, testcase, cmd, passname, input_folder):
@@ -102,7 +104,7 @@ class BBTest:
                  "runner failed on input")
     filename = f'{testcase}-{cmd}-{passname}.texp'
     with TEMP(filename, result) as out:
-      return CALL(f"{BB.cpp}/bin/bbfmt {out.name}")
+      return FMT(out.name)
 
   @classmethod
   def single(cls, test, passname):
