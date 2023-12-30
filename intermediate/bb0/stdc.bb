@@ -1,0 +1,1 @@
+(decl @puts (types i8*) i32)
