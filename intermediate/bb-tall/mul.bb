@@ -1,6 +1,3 @@
-(str-table
-  (0 "test multiply: 7 * argc = %d\0A\00"))
-
 (decl @printf (types i8* ...) i32)
 
 (def @main (params (%argc i32) (%argv i8**)) i32 (do
@@ -8,3 +5,5 @@
 
   (return 0)
 ))
+
+(str-table (0 "test multiply: 7 * argc = %d\0A\00"))
