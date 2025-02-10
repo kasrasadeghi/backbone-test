@@ -3,7 +3,7 @@
 
 (decl @puts (types i8*) i32)
 
-(def @main (params (%argc i32) (%argv i8**)) i32(do 
+(def @main (params (%argc i32) (%argv i8**)) i32 (do 
   (let %$0 (< %argc 3))
   (if %$0 (do 
     (call @puts (args (str-get 0)))

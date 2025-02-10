@@ -6,7 +6,7 @@
 ))
 
 (def @main params i32 (do
-  (call @void-returner types void args) (return 0 i32)
+  (call @void-returner types void args) (return (i32 0))
 ))
 
 (str-table (0 "c = %c\0A\00"))

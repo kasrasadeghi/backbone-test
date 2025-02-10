@@ -12,7 +12,7 @@
   (if %$1 (do 
     (call @puts (types i8*) i32 (args (str-get 1)))
   ))
-  (return 0 i32)
+  (return (i32 0))
 ))
 
 (str-table (0 "Hello World!\00") (1 "Goodbye World!\00"))

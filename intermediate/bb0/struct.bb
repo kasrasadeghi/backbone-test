@@ -10,17 +10,17 @@
   (let %r (bitcast i8* %struct.Basic* %$0))
   (let %field_loc (index %r %struct.Basic 0))
   (store %a i32 %field_loc)
-  (return %r %struct.Basic*)
+  (return (%struct.Basic* %r))
 ))
 
 (decl @printf (types i8* ...) i32)
 
-(def @main (params (%argc i32) (%argv i8**)) i32(do 
+(def @main (params (%argc i32) (%argv i8**)) i32 (do 
   (let %t (call @makeBasic (types i32) %struct.Basic* (args %argc)))
   (let %field_loc (index %t %struct.Basic 0))
   (let %field_val (load i32 %field_loc))
   (call @printf (types i8* ...) i32 (args (str-get 0) %field_val))
-  (return 0 i32)
+  (return (i32 0))
 ))
 
 (str-table (0 "Basic{a = %d}\0A\00"))
